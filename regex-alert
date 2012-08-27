@@ -1,0 +1,69 @@
+# If you have to do a lot of wildcarding to match something please
+# include an example of the actual message as a comment.  That will make
+# it easier for future maintainers who might need to match variants of
+# that message.
+
+# Linux kernel messages
+kernel: EXT3-fs error
+kernel: EXT3-fs warning
+kernel: Uhhuh. NMI received for unknown reason
+kernel: Dazed and confused, but trying to continue
+kernel: Do you have a strange power saving mode enabled
+kernel: megaraid: aborting
+kernel: megaraid abort:
+kernel: megaraid: resetting the host...
+kernel: megaraid: \d+ outstanding commands. Max wait \d+ sec
+kernel: megaraid mbox: Wait for 1 commands to complete:\d+
+kernel: megaraid mbox: reset sequence completed successfully
+kernel: nfs: server .* not responding, still trying
+kernel: nfs: server .* OK
+kernel: Out of Memory: Killed process
+kernel: ata1: translated ATA stat/err
+kernel: ata1: status=.* Error
+kernel: ata1: error=.* UncorrectableError
+scsi0: ERROR on channel
+kernel: Current sda: sense key Medium Error
+kernel: Additional sense: Unrecovered read error
+kernel: end_request: I/O error
+
+# FreeBSD kernel messages
+/kernel: pid \d+ .*, uid \d+ on /: file system full
+/kernel: swap_pager_getswapspace: failed
+/kernel: pid \d+ .*, uid \d+, was killed: out of swap space
+# Intentionally alerting on the "alive again" messages, so that if
+# there's a quick blip the NOC will see both the "not responding" and
+# the "alive again" messages and respond appropriately
+/kernel: nfs server .*: not responding
+/kernel: nfs server .*: is alive again
+
+# FreeBSD RAID controller errors
+amrd: .AMR ALERT.
+amrd: .*: disk.s. on controller \d+ volume \d+ needs to be replaced:
+amrd: .*: recovering to .* on controller \d+ volume \d+
+cissd: .CISS ALERT.
+cissd: .*: disk.s. on controller \d+ .* needs to be replaced:
+cissd: .*: controller \d+ .* is actively using spare
+
+# Most crond errors are mostly harmless, but this one should get cleaned
+# up (usually indicates someone created a directory in the crontab spool
+# directory).
+crond.*: .* NOT REGULAR
+
+named.*: zone .*: refresh: unexpected rcode .SERVFAIL. from master
+named.*: zone .*: refresh: failure trying master .*: timed out
+named.*: zone .*: refresh: retry limit for master .* exceeded
+
+# Dell hardware messages from OMSA
+Server Administrator: Storage Service EventID: \d+  Predictive Failure reported:
+Server Administrator: Storage Service EventID: \d+  Physical disk removed:
+Server Administrator: Storage Service EventID: \d+  Array disk removed:
+Server Administrator: Storage Service EventID: \d+  Device failed:
+Server Administrator: Storage Service EventID: \d+  Redundancy lost:
+Server Administrator: Storage Service EventID: \d+  Virtual disk degraded:
+Server Administrator: Storage Service EventID: \d+  Array disk Rebuild started:
+Server Administrator: Storage Service EventID: \d+  Redundancy normal:
+Server Administrator: Storage Service EventID: \d+  Array disk Rebuild completed:
+Server Administrator: Instrumentation Service EventID: \d+  Temperature sensor detected a warning value
+Server Administrator: Instrumentation Service EventID: \d+  Temperature sensor detected a failure value
+Server Administrator: Instrumentation Service EventID: \d+  Temperature sensor returned to a normal value
+

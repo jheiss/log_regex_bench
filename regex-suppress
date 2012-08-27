@@ -1,0 +1,1155 @@
+# If you have to do a lot of wildcarding to match something please
+# include an example of the actual message as a comment.  That will make
+# it easier for future maintainers who might need to match variants of
+# that message.
+
+# Linux kernel messages
+kernel: $
+kernel: Linux version
+kernel: Kernel command line:
+kernel: BIOS-provided physical RAM map:
+kernel:  BIOS-
+kernel: \d+MB HIGHMEM available
+kernel: \d+MB LOWMEM available
+kernel: found SMP MP-table at
+kernel: found SMP MP-table at
+kernel: On node 0 totalpages:
+kernel:   DMA zone:
+kernel:   Normal zone:
+kernel:   HighMem zone:
+kernel: highmem bounce pool size:
+kernel: Memory:
+kernel: Total HugeTLB memory allocated
+kernel: Calibrating delay loop
+kernel: DMI .* present
+kernel: Processor .* APIC version
+kernel: Initializing CPU
+kernel: CPU \d+ irqstacks
+kernel: CPU: After generic identify
+kernel: CPU: After vendor identify
+kernel: CPU: After all inits
+kernel: CPU: Trace cache:
+kernel: CPU: L2 cache:
+kernel: CPU: L3 cache:
+kernel: CPU: Physical Processor ID:
+kernel: CPU\d+: .* available
+kernel: CPU\d+: Thermal monitoring enabled
+kernel: CPU\d+: Intel
+kernel: Total of \d+ processors activated
+kernel: per-CPU timeslice cutoff:
+kernel: Detected .* MHz processor
+kernel: Booting processor
+kernel: task migration cache decay timeout:
+kernel: Intel machine check architecture supported
+kernel: Intel machine check reporting enabled
+kernel: Enabling fast FPU save and restore... done
+kernel: Enabling unmasked SIMD FPU exception support... done
+kernel: Checking 'hlt' instruction... OK
+kernel: checking TSC synchronization across \d+ CPUs: passed
+kernel: Brought up 4 CPUs
+kernel: mtrr: v\d
+kernel: mtrr: probably your BIOS does not setup all CPUs
+kernel: mtrr: corrected configuration
+kernel: mtrr: your CPUs had inconsistent fixed MTRR settings
+kernel: Using tsc for high-res timesource
+kernel: divert: allocating divert_blk
+kernel: divert: not allocating divert_blk
+kernel: .* no IPv6 routers present
+kernel: IPv6 over IPv4 tunneling driver
+kernel: IP Protocols: ICMP, UDP, TCP, IGMP
+kernel: NET4: Unix domain sockets 1.0/SMP for Linux NET 4.0
+kernel: NET4: Linux TCP/IP 1.0 for NET 4.0
+kernel: NET: \d+ messages suppressed
+kernel: Initializing IPsec netlink socket
+kernel: TCP: drop open request from
+kernel: TCP: Hash tables configured
+kernel: TCP: Treason uncloaked
+kernel: UDP: short packet
+kernel: UDP: bad checksum
+kernel: IP: routing cache hash table
+kernel: SCSI subsystem driver Revision
+kernel: SCSI subsystem initialized
+kernel: RAMDISK: Compressed image found at block 0
+kernel: eth\d+: Tigon3
+kernel: eth\d+: RXcsums
+kernel: tg3.c
+kernel: .* Link is up at
+kernel: .*: .* Link is Up
+kernel: .* Flow control is
+# One could argue that we should alert on link down, but it seems to me
+# that there are better ways of monitoring for that sort of thing
+kernel: .*: eth\d+: Link is down
+kernel: .*: eth\d+: .* NIC Link is Down
+kernel: Freeing initrd memory:
+kernel: Freeing unused kernel memory:
+kernel: EXT2-fs warning: checktime reached, running e2fsck is recommended
+kernel: VFS: Mounted root
+kernel: VFS: Disk quotas dquot
+kernel: md: ... autorun DONE
+kernel: Adding .* swap on
+kernel: Disabled Privacy Extensions on device
+kernel: netlog: local
+kernel: netlog: interface
+kernel: netlog: remote
+kernel: netdump: local
+kernel: netdump: interface
+kernel: netdump: remote
+kernel: netdump: network crash dump enabled
+kernel: netconsole: network logging started
+kernel: ....network console startup....
+kernel: NET: Registered protocol family
+kernel: Serial: 8250/16550 driver
+kernel: serio: .* port at
+kernel: ttyS.* at .* is a
+kernel: RAMDISK driver initialized
+kernel: Uniform Multi-Platform E-IDE driver
+kernel: Uniform CD-ROM driver
+kernel: ide-floppy driver
+kernel: ide-floppy: Can't get floppy parameters
+kernel: ide: Assuming .* system bus speed
+kernel: ide\d+ at .* on irq
+kernel: SvrWks CSB5: IDE controller
+kernel: SvrWks CSB5: chipset revision
+kernel: SvrWks CSB5: not 100% native mode
+kernel: SvrWks CSB5: simplex device
+kernel:     ide\d+: BM-DMA at .*, BIOS settings:
+kernel: Probing IDE interface
+kernel: ide\d+: Wait for ready failed before probe
+kernel: hd.*: .*, ATAPI CD/DVD-ROM drive
+kernel: hda: ATAPI .* CD-ROM drive
+kernel: Using cfq io scheduler
+kernel: usbcore: registered new driver
+kernel: drivers/usb/input/hid-core.c: v2.0:USB HID core driver
+# Message related to Northbridge (TLB)
+kernel:	Northbridge status a60000020005001b	
+kernel:	GART TLB error generic level generic	
+kernel:	extended error gart error	
+kernel:	link number 0	
+kernel:	err cpu0	
+kernel:	processor context corrupt	
+kernel:	error address valid	
+kernel:	error uncorrected	
+kernel:	previous error lost	
+kernel:	error address 0000000074f60000
+# Messages related to connecting/disconnecting a USB keyboard
+kernel: usb .*: new low speed USB device using address
+kernel: input: USB HID v\d+.\d+ Keyboard
+kernel: input: USB HID v\d+.\d+ Device
+kernel: drivers/usb/input/hid-core.c: input irq status -84 received
+kernel: usb .*: USB disconnect, address \d+
+kernel: usb .*: USB disconnect, address \d+
+kernel: drivers/usb/input/hid-core.c: can't resubmit intr
+# End USB keyboard messages
+kernel: input: PS/2 Generic Mouse on
+kernel: mice: PS/2 mouse device common for all mice
+kernel: input: AT Translated Set 2 keyboard
+kernel: md: md driver
+kernel: FDC 0 is a
+kernel: Floppy drive
+kernel: inserting floppy driver
+kernel: cdrom: open failed
+kernel: i2c /dev entries driver
+kernel: lp: driver loaded
+kernel: device-mapper: .* initialised
+kernel: oom-killer: gfp_mask
+kernel: lockd: server .* OK
+kernel: EXT3 FS .* internal journal
+kernel: EXT3-fs: mounted filesystem with ordered data mode
+kernel: EXT3-fs: recovery complete
+kernel: EXT3-fs: write access will be enabled during recovery
+kernel: Partition check:
+kernel: kjournald starting.  Commit interval 5 seconds
+kernel: Journalled Block Device driver loaded
+kernel: Adding Swap:
+# There seems to be some variability in how much space occurs before New
+kernel: cciss:  ?New Logical Volume not found
+kernel: cciss: Device .* has been found at
+kernel: cciss: using DAC cycles
+kernel:  cciss/c\d+d\d+:
+kernel:       blocks= \d+ block_size= \d+
+kernel:       heads= \d+, sectors= \d+, cylinders= \d+
+kernel: HP CISS Driver
+kernel: Fusion MPT base driver
+kernel: Copyright .* LSI Logic Corporation
+kernel: Fusion MPT misc device .* driver
+kernel: mptctl: Registered with Fusion MPT base driver
+kernel: mptctl: /dev/mptctl
+kernel: dcdbas: module license 'unspecified' taints kernel
+kernel: markdev: initializing
+kernel: markdev: successfully registered device numbers
+kernel: markdev: unregistering device numbers
+kernel: markdev: module license 'Proprietary' taints kernel
+kernel: Unloaded markdev module
+kernel: markdev driver module loaded
+kernel: application bug: .* has SIGCHLD set to SIG_IGN but calls wait
+kernel: \(see the NOTES section of 'man 2 wait'\). Workaround activated
+kernel: PCI: PCI BIOS revision
+kernel: PCI: Using configuration type
+kernel: PCI: Probing PCI hardware
+kernel: PCI: Ignoring .* of IDE controller
+kernel: PCI: Using ACPI for IRQ routing
+kernel: PCI: Device
+kernel: pci_hotplug: PCI Hot Plug PCI Core version:
+kernel: ACPI: Power Button
+kernel: ACPI: PCI interrupt
+kernel: ACPI: \(supports .*\)
+kernel: ACPI wakeup devices
+kernel: ACPI: RSDP
+kernel: ACPI: RSDT
+kernel: ACPI: FADT
+kernel: ACPI: MADT
+kernel: ACPI: SPCR
+kernel: ACPI: DSDT
+kernel: ACPI: LAPIC
+kernel: ACPI: Local APIC address
+kernel: ACPI: PM-Timer IO Port
+kernel: ACPI: IOAPIC
+kernel: ACPI: INT_SRC_OVR
+kernel: ACPI: IRQ
+kernel: ACPI: Subsystem revision
+kernel: ACPI: Interpreter enabled
+kernel: ACPI: Using IOAPIC for interrupt routing
+kernel: ACPI: PCI Root Bridge
+kernel: ACPI: PCI Interrupt Routing Table
+kernel: ACPI: PCI Interrupt Link
+kernel: ACPI: Processor
+kernel: ACPI: Thermal Zone
+kernel: IOAPIC
+kernel: Using ACPI
+kernel: Enabling APIC
+kernel: ENABLING IO-APIC IRQs
+kernel: Using APIC driver default
+kernel: apm: BIOS not found
+kernel: audit: initializing netlink socket
+kernel: audit.*: initialized
+kernel: Linux Plug and Play Support
+kernel: Built \d+ zonelists
+kernel: ..TIMER:
+kernel: md: Autodetecting RAID arrays
+kernel: md: autorun
+kernel: hub .*: USB hub found
+kernel: hub .*: \d+ ports detected
+kernel: ohci_hcd .*: OHCI Host Controller
+kernel: ohci_hcd .*: new USB bus registered, assigned bus number
+kernel: ohci_hcd .*: irq \d+, pci mem
+kernel: ohci_hcd: .* 'Open' Host Controller
+kernel: pciehp: Both _OSC and OSHP methods do not exist
+kernel: Evaluate _OSC Set fails. Status
+kernel: ehci_hcd 0000:00:03.2: EHCI Host Controller
+kernel: ehci_hcd 0000:00:03.2: irq 11, pci mem f8820000
+kernel: ehci_hcd 0000:00:03.2: new USB bus registered, assigned bus number 1
+kernel: ehci_hcd 0000:00:03.2: USB 2.0 enabled, EHCI 1.00, driver
+kernel: usb 1-3: new high speed USB device using address 3
+kernel: ip_tables: .* Netfilter core team
+kernel: Security Scaffold .* initialized
+kernel: SELinux:  Initializing
+kernel: SELinux:  Starting in permissive mode
+kernel: SELinux:  Registering netfilter hooks
+kernel: SELinux:  Unregistering netfilter hooks
+kernel: SELinux:  Disabled at runtime
+kernel: There is already a security framework initialized
+kernel: selinux_register_security:  Registering secondary module capability
+kernel: Capability LSM initialized as secondary
+kernel: Initializing Cryptographic API
+kernel: ksign: Installing public key data
+kernel: Loading keyring
+kernel: - Added public key
+kernel: - User ID: Red Hat
+kernel: Real Time Clock Driver
+kernel: set_rtc_mmss: can't update from
+kernel: PID hash table entries:
+kernel: Console:
+kernel: vesafb: probe of vesafb0
+kernel: Linux agpgart interface
+kernel: Dentry cache hash table entries:
+kernel: Inode-cache hash table entries:
+kernel: Mount-cache hash table entries:
+kernel: Dquot-cache hash table entries:
+kernel: zapping low mappings
+kernel: checking if image is initramfs... it is
+kernel: Kernel logging .* stopped
+kernel: Kernel log daemon terminating
+kernel: klogd .* log source
+# Example: kernel: RPC: bad TCP reclen 0x0d0a0d0a (non-terminal)
+kernel: RPC: bad TCP reclen
+# It's not clear what causes the next three messages (they appear
+# together) or if they represent a real problem, so filtering them might
+# be a bad idea.
+kernel: RPC: Can't bind to reserved port
+kernel: RPC: can't bind to reserved port
+kernel: RPC: error 5 connecting to server
+# Alerting over a threshold might be good here
+kernel: rpc-srv/tcp: nfsd: sent only \d+ when sending \d+ bytes - shutting down socket
+kernel: NFS: readdir reply truncated
+# Web searching seems to indicate that these 116 errors are relatively
+# harmless and caused by user error, nothing we can do about them
+kernel: nfs_statfs: statfs error = 116
+# This is here as a note, statfs error 13 seems to indicate that the NFS
+# server no longer exports the filesystem to this client.  So we don't
+# want to filter those out.
+#kernel: nfs_statfs: statfs error = 13
+kernel: device .* entered promiscuous mode
+kernel: device .* left promiscuous mode
+kernel: /dev/vmmon.*: host clock rate change request
+kernel: vmmon: Had to deallocate locked \d+ pages from vm driver
+kernel: vmmon: Had to deallocate AWE \d+ pages from vm driver
+# SELinux messages from systems which haven't been rebooted since we
+# disabled SELinux
+kernel: audit.*: avc:  granted
+kernel: audit.*: avc:  denied
+kernel: SMB connection re-established
+kernel: loop: loaded
+kernel: ISO 9660 Extensions:
+kernel: printk: \d+ messages suppressed
+kernel: crsd.bin.* general protection
+kernel: IA-32 Microcode Update Driver
+kernel: microcode: CPU\d+ not 'upgrading' to earlier revision
+kernel: microcode: CPU\d+ already at revision
+kernel: microcode: No new microdata for cpu \d+
+kernel: Installing knfsd
+kernel: nfsd: last server has exited
+kernel: nfsd: unexporting all filesystems
+# Web searching indicated that these are harmless warnings
+kernel: svc: bad direction \d+, dropping request
+kernel: Losing some ticks... checking if CPU frequency changed
+kernel: warning: many lost ticks
+kernel: Your time source seems to be instable or some driver is hogging interupts
+kernel: rip __do_softirq.0x4d/0xd0
+kernel: ipmi message handler
+kernel: IPMI System Interface driver
+kernel: ipmi_si: Found SMBIOS-specified state machine
+kernel:  IPMI kcs interface initialized
+kernel: ipmi device interface
+kernel: Attached scsi generic sg\d+ at scsi\d+
+# Messages related to Cavium card/driver
+kernel: Cavium Driver
+kernel: Loaded Cavium Driver
+kernel: N1 Device found at Bus \d+ Slot \d+
+kernel: bar \d+: [[:xdigit:]]+
+kernel: NO DDR on the chip
+kernel: Resorting to Context memory on Host
+kernel: Finished Initializing this device
+kernel: Total Number of N1/N1-Lite Devices: \d+
+kernel: Completion Addr [[:xdigit:]]+
+kernel: Completion Bus Addr [[:xdigit:]]+
+kernel: Registeration is a success The major device number is 125
+kernel: Starting poll_thread
+kernel: device count = \d+
+kernel: if you want to talk to the device driver,
+kernel: I suggest you use:
+kernel:  mknod pkp_drv c 125 0
+kernel: pkp_drv: module license 'CAVIUM' taints kernel
+kernel: got mainline microcode
+kernel: Code type = \d+, code size = [[:xdigit:]]+, data size = [[:xdigit:]]+
+kernel: got boot microcode
+kernel: UEN = [[:xdigit:]]+
+kernel: Final Core Mask = [[:xdigit:]]+
+kernel: Loaded Boot microcode
+kernel: Loaded Main microcode
+kernel: Loading of Microcodes successful
+# End messages related to Cavium card/driver
+kernel: .* sent an invalid ICMP type \d+, code \d+ error to a broadcast: .* on eth\d+
+# These are the messages that go along with the message that the
+# out-of-memory killer has killed a process.  We pass along the message
+# indicating what process was killed as an alert, but these messages
+# aren't useful to also include, so filter them out.  The SA or App
+# Support team can always log into the box to see them
+kernel: DMA per-cpu:
+kernel: Normal per-cpu:
+kernel: HighMem per-cpu:
+kernel: Free pages:
+kernel: Active:
+kernel: DMA free:
+kernel: protections..:
+kernel: Normal free:
+kernel: HighMem free:
+kernel: DMA:
+kernel: Normal:
+kernel: HighMem:
+kernel: Swap cache:
+kernel: Mem-info:
+kernel: cpu \d+ hot: low \d+, high \d+, batch \d+
+kernel: cpu \d+ cold: low \d+, high \d+, batch \d+
+kernel: \d+ bounce buffer pages
+kernel: Free swap:
+kernel: \d+ pages of RAM
+kernel: \d+ pages of HIGHMEM
+kernel: \d+ reserved pages
+kernel: \d+ pages shared
+kernel: \d+ pages swap cached
+kernel: Fixed up OOM kill
+# End out-of-memory related messages
+kernel: MSI INIT SUCCESS
+
+# FreeBSD kernel messages
+#  FreeBSD 4 puts a / in front of kernel, FreeBSD 6 does not
+# Example: kernel: Thu Feb  1 06:25:14 PST 2007
+kernel: \w+ \w+ .* \d+$
+# Example of sysctl setting at boot time:
+# /kernel: kern.mmapsync:
+# /kernel: 1 
+# /kernel: ->       
+# /kernel: 0   
+# /kernel: 
+/kernel: (kern|net|vfs|debug)\.[\w\.]+: $
+/kernel: \d+$
+/kernel: -> $
+/kernel: $
+/kernel: Doing initial network setup:
+/kernel: hostname$
+kernel: \.$
+# Example: /kernel: add net default: gateway 1.2.3.4
+/kernel: add net default:
+# Example: em0: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+/kernel: em\d+:
+/kernel: bge\d+:
+/kernel: lo0:
+# Example: /kernel: options=3<RXCSUM,TXCSUM>
+/kernel: options=
+# Example: /kernel: inet 1.2.3.4 netmask 0xfffffe00 broadcast 1.2.3.4
+/kernel: inet \d
+# Example: /kernel: ether 00:30:48:aa:aa:aa
+/kernel: ether \d
+# Example: /kernel: media: Ethernet autoselect
+/kernel: media:
+# Example: /kernel: status: no carrier
+/kernel: status:
+/kernel: Additional routing options:
+/kernel: TCP keepalive=
+/kernel: Routing daemons:
+/kernel: Mounting NFS file systems:
+/kernel: em\d+: Link is up
+/kernel: bge\d+: Link is up
+/kernel: Clearing /tmp:$
+/kernel: Additional daemons:$
+/kernel: syslogd$
+/kernel: syslogd: $
+/kernel: dumpon: $
+/kernel: sysctl: kern.dumpdev
+/kernel: : $
+/kernel: Doing additional network setup:
+/kernel: ntpdate$
+/kernel: ntpd$
+/kernel: portmap$
+/kernel: Starting final network daemons:
+/kernel: nfsiod$
+/kernel: NFS access cache time=
+/kernel: Turning on accounting:
+/kernel: Accounting suspended
+/kernel: Accounting resumed
+/kernel: ELF ldconfig path:
+/kernel: a.out ldconfig path:
+/kernel: Starting standard daemons:
+/kernel: cron$
+/kernel: sshd$
+/kernel: pushsshd$
+/kernel: sendmail$
+/kernel: snmpd$
+/kernel: find: $
+/kernel: Initial rc.i386 initialization:
+/kernel: Configuring syscons:
+/kernel: blanktime$
+/kernel: Additional ABI support:
+/kernel: Starting local daemons:
+/kernel: Local package initialization:
+/kernel: yinst:
+/kernel: markdev driver module loaded
+/kernel: mark$
+/kernel: dev driver module loaded
+/kernel: WARNING: driver mkd should register devices with make_dev
+/kernel: Unloaded markdev module
+kernel: Additional TCP options:
+kernel: Connection attempt to
+kernel: udp-log-in-vain bandwidth limit
+kernel: tcp-log-in-vain bandwidth limit
+/kernel: Limiting closed port RST response
+/kernel: nfs/tcp clnt: Peer closed connection, tearing down TCP connection
+# 32 is EPIPE, thus this is probably indicating loss of the TCP
+# connection to the server.
+/kernel: nfs send error 32 for server
+# Example: /kernel: got bad cookie vp 0xdd62fd80 bp 0xbc0a81c0
+/kernel: got bad cookie
+# Apparent the NOC and Monitoring feel these are not alert-worthy
+/kernel: pid \d+ .*, uid \d+: exited on signal 6 .core dumped.
+/kernel: pid \d+ .*, uid \d+: exited on signal 11 .core dumped.
+# FreeBSD seems to log some stuff when SEC starts up
+kernel: SEC .Simple Event Correlator
+kernel: Changing working directory to /
+kernel: Reading configuration from
+kernel: \d+ rules loaded from
+kernel: calcru: negative runtime of
+
+DIALUP AT .* BY
+LOGIN ON .* BY
+
+last message repeated \d+ times
+
+acpid: acpid startup succeeded
+acpid: acpid shutdown succeeded
+
+anacron: anacron startup succeeded
+anacron.*: Anacron .* started on
+anacron.*: Job .* started
+anacron.*: Job .* terminated
+anacron.*: Normal exit
+anacron.*: Updated timestamp for job
+anacron.*: Will run job
+anacron.*: Jobs will be executed sequentially
+
+apcupsd.*: Communications with UPS lost
+
+# Remedy component
+arplugin:
+
+# Remedy server messages
+arsvcdsp:
+apsvcae:
+
+autofs: automount startup succeeded
+#automount:
+automount.*:
+
+Cacti.*: .* CACTID: Poller
+
+crond.*: .* CMD
+CROND.*: .* CMD
+crond.*: .* RELOAD
+crond.*: .* STARTUP
+# Usually temp files left in the crontab directory
+crond.*: .* ORPHAN
+# I can't figure out what UNSAFE means.  I have very mixed feeling about
+# filtering it out without knowing more...
+crond.*: .* UNSAFE
+crond: crond startup succeeded
+crond: crond shutdown succeeded
+crond: crond -HUP succeeded
+# Example: crontab[298]: (root) LIST (root)
+crontab.*: .* LIST
+crontab.*: .* BEGIN EDIT
+crontab.*: .* REPLACE
+crontab.*: .* END EDIT
+crontab.*: .* DELETE
+/usr/sbin/cron.*: .* CMD
+/usr/sbin/cron.*: .* RELOAD
+
+atd: atd startup succeeded
+atd: atd shutdown succeeded
+
+cups: cupsd startup succeeded
+cups: cupsd shutdown succeeded
+
+# Sweet error message
+cvs: Dying gasps received from client
+
+# Example: date: Thu Feb  1 10:55:45 PST 2007
+date: \w+ \w+ .* \d+ $
+
+dbus: Can't send to audit system:
+dbus-daemon-1: Unknown username "haldaemon" in message bus configuration file
+
+dce-clean: Removing DCE RPC endpoint map
+
+dhclient.*:
+
+dhcpd: dhcpd startup succeeded
+dhcpd: dhcpd shutdown succeeded
+dhcpd: dhcpd shutdown failed
+dhcpd: exiting
+dhcpd: DHCPDISCOVER
+dhcpd: DHCPOFFER
+dhcpd: DHCPREQUEST for
+dhcpd: DHCPACK on
+dhcpd: DHCPNAK on
+# These next two are logging of dynamic dns requests from clients
+dhcpd: if IN A
+dhcpd: if IN TXT
+dhcpd: Internet Software Consortium DHCP Server
+dhcpd: Copyright
+dhcpd: All rights reserved
+dhcpd: For info, please visit
+dhcpd: Wrote \d+ deleted host decls to leases file
+dhcpd: Wrote \d+ new dynamic host decls to leases file
+dhcpd: Wrote \d+ leases to leases file
+dhcpd: Listening on
+dhcpd: Sending on
+dhcpd: No subnet declaration for
+dhcpd: .. Ignoring requests on .* If this is not what
+dhcpd:    you want, please write a subnet declaration
+dhcpd:    in your dhcpd.conf file for the network segment
+dhcpd:    to which interface .* is attached.
+dhcpd: $
+dhcpd: .. You must add a ddns-update-style statement
+dhcpd:    To get the same behaviour as in 3.0b2pl11 and previous
+dhcpd:    versions, add a line that says "ddns-update-style ad-hoc;"
+dhcpd:    Please read the dhcpd.conf manual page for more information.
+dhcpd: If you did not get this software from ftp.isc.org, please
+dhcpd: get the latest from ftp.isc.org and install that before
+dhcpd: requesting help
+dhcpd: If you did get this software from ftp.isc.org and have not
+dhcpd: yet read the README, please read it before requesting help
+dhcpd: If you intend to request help from the
+dhcpd: mailing list, please read the section on the README about
+dhcpd: submitting bug reports and requests for help
+dhcpd: Please do not under any circumstances send requests for
+dhcpd: help directly to the authors of this software - please
+dhcpd: send them to the appropriate mailing list as described in
+samud1 dhcpd: the README file
+# Alerting over a threshold might be good here
+dhcpd: bogus UDP packet length
+dhcpd: accepting packet with data after udp payload
+dhcpd: Discarding packet with bogus hlen
+dhcpd: ICMP Echo reply while lease .* valid
+dhcpd: Abandoning IP address .*: pinged before offer
+dhcpd: ICMP Echo Reply for .* late or spurious
+
+# This appears to be an OMSA component
+dsm_om_shrsvc32d: tput: No value for $TERM and no -T specified
+
+fsck: .* clean
+fsck: .* recovering journal
+
+fstab-sync.*: removed all generated mount points
+fstab-sync.*: added mount point
+
+# Oracle RAC related
+gcstartup:
+
+groupdel.*: remove group
+
+hal.hotplug.*: DEVPATH is not set
+haldaemon: haldaemon startup succeeded
+haldaemon: haldaemon -TERM succeeded
+
+hpasm:\s+$
+hpasm: Shutting down Storage Agents
+hpasm:    Shutting down Storage Event Logger
+hpasm:    Shutting down IDA agent
+hpasm:    Shutting down FCA agent
+hpasm:    Shutting down IDE agent
+hpasm:    Shutting down SCSI agent
+hpasm:    Shutting down SAS agent
+hpasm: Shutting down Server Agents
+hpasm:    Shutting down Standard Equipment agent
+hpasm:    Shutting down Health agent
+hpasm:    Shutting down Performance agent
+hpasm: Shutting down Foundation Agents
+hpasm:    Shutting down Threshold agent
+hpasm:    Shutting down Host agent
+hpasm:    Shutting down SNMP Peer
+hpasm:    Shutting down Proliant System Health Monitor
+hpasmd.*: ProLiant System Health Monitor loading
+hpasmd.*: ProLiant System Health Monitor unloading
+
+httpd: httpd startup succeeded
+httpd: httpd shutdown succeeded
+
+in.tftpd.*: RRQ from
+in.tftpd.*: tftp: client does not accept options
+
+init: Entering runlevel:
+init: Switching to runlevel:
+init: Re-reading inittab
+init: Trying to re-exec init
+# Crappy Oracle installer (or maybe crappy DBAs, not sure which) puts
+# entries in inittab for programs that don't exist.  And they don't seem
+# interested in fixing it.
+init: Id "h1" respawning too fast: disabled for 5 minutes
+init: Id "m1" respawning too fast: disabled for 5 minutes
+
+init.crs: Startup will be queued to init within 90 seconds
+
+instsvcdrv: dell_rbu device driver loaded
+
+irqbalance: irqbalance startup succeeded
+irqbalance: irqbalance shutdown succeeded
+
+jboss:
+
+# Errors from Linux hosts where the audit service was only partially disabled
+LAuS error - do_command.c:226 - laus_attach: .* laus_attach: No such device
+LAuS error - .* - laus_log: .* laus_log: No such device
+
+logger: Oracle Cluster Ready Services starting up automatically
+logger: Cluster Ready Services waiting on dependencies
+logger: Cluster Ready Services completed waiting on dependencies
+logger: Oracle Cluster Ready Services disabled by administrator
+logger: Running CRSD with TZ
+logger: Oracle clsomon shutdown successful
+logger: Oracle CSSD graceful shutdown
+# Yes, these represent brokenness, but the DBAs refuse to fix it and
+# don't seem to care.  Their loss I guess.  (See the associated inittab
+# errors above.)
+logger: Oracle Cluster Ready Services disabled by corrupt install
+logger:    Could not access /etc/oracle/scls_scr/.*/root/crsstart
+
+# Example: login: 1 LOGIN FAILURE ON ttyd0
+login: \d+ LOGIN FAILURE
+# Example: login[29005]: FAILED LOGIN 1 FROM (null) FOR mmarscha, Authentication failure
+login.*: FAILED LOGIN
+# Example: login: login on ttyd0 as saltmanm
+login: login on .* as
+# Example: login: ROOT LOGIN (root) ON ttyd0
+login: ROOT LOGIN (root) ON tty
+
+# logrotate seems to sporadically exit with error, haven't seen this be
+# the result of a signficant error yet, so I'm filtering these out for
+# now.
+logrotate: ALERT exited abnormally with
+
+lsb_start_daemon: dsm_om_shrsvc32d startup succeeded
+lsb_log_message:  succeeded
+lsb_killproc: dsm_om_shrsvc32d shutdown succeeded
+
+lvm.static:   No volume groups found
+
+messagebus: messagebus startup succeeded
+messagebus: messagebus -TERM succeeded
+
+mgetty.*: .* login time out
+
+microcode_ctl: microcode_ctl startup succeeded
+
+modprobe: modprobe: Can't locate module 0
+modprobe: modprobe: Can't locate module char-major-10-220
+
+mountd.*: mount request from
+mountd.*: mount request denied from
+#mountd.*: can't change attributes for
+mountd.*: Caught signal 15, un-registering and exiting
+mount.smbfs.*:
+
+mptctl: Starting mptctl:
+mptctl: Waiting for mptctl driver registration to complete:
+mptctl: ..60G$
+mptctl: $
+
+# Presumably any alerts/errors from nagios can be ignored here
+nagios:
+
+named.*: received notify for zone
+named.*: journal file .* does not exist, creating it
+named.*: zone .*: transferred serial \d+
+named.*: transfer of .* from .*: end of transfer
+named.*: zone .*: sending notifies
+named.*: client .*: update forwarding denied
+named.*: client .*: zone transfer .* denied
+
+netdump: initializing netdump succeeded
+netdump: initializing netconsole succeeded
+netdump: disabling netconsole succeeded
+netdump: disabling netdump succeeded
+netdump.*: inserting netconsole module with arguments
+# Alerting over a threshold might be good here
+netdump.*: Got too many timeouts in handshaking, ignoring client
+netdump.*: Got too many timeouts waiting for SHOW_STATUS for client
+netdump.*: Got too many timeouts waiting for memory page for client
+
+network: Setting network parameters:  succeeded
+network: Bringing up loopback interface:  succeeded
+network: Bringing up interface eth\d+:  succeeded
+
+newsyslog.*: logfile turned over
+
+netfs: Mounting other filesystems:
+netfs: Unmounting NFS filesystems:  succeeded
+nfs: Starting NFS services:  succeeded
+nfs: rpc.nfsd startup succeeded
+nfs: rpc.mountd startup succeeded
+nfs: rpc.mountd shutdown succeeded
+nfs: rpc.mountd shutdown failed
+nfs: nfsd shutdown succeeded
+nfs: nfsd shutdown failed
+nfs: rpc.rquotad startup succeeded
+nfs: rpc.rquotad shutdown succeeded
+nfs: rpc.rquotad shutdown failed
+nfs: Shutting down NFS services:  succeeded
+nfslock: rpc.statd startup succeeded
+nfslock: rpc.statd shutdown succeeded
+nfslock: lockd shutdown succeeded
+nfsd.*: nfssvc_versbits:
+
+ntpd:  succeeded
+# Example: ntpd[242]: ntpd 4.1.0-a Mon Jul 17 13:33:54 PDT 2006 (1)
+ntpd.*: ntpd \d\.
+ntpd: ntpd startup succeeded
+ntpd.*: signal_no_reset:
+ntpd.*: precision =
+ntpd.*: Listening on interface
+ntpd.*: no IPv6 interfaces found
+ntpd.*: kernel time sync status
+ntpd.*: kernel time sync enabled
+ntpd.*: kernel time sync disabled
+# Example: ntpd[2315]: frequency initialized 14.346 PPM from /var/lib/ntp/drift
+ntpd.*: frequency initialized .* PPM from
+# Example: ntpd[242]: frequency initialized -77.081 from /var/db/ntp.drift
+ntpd.*: frequency initialized .* from
+ntpd.*: synchronized to
+ntpd.*: time reset
+# Example: ntpd[242]: kernel time discipline status 2040
+ntpd.*: kernel time discipline status
+# Example: ntpdate[240]: step time server 1.2.3.4 offset -16.921889 sec
+ntpdate.*: step time server
+# Example: ntpdate[240]: ntpdate 4.1.0-a Mon Jul 17 13:33:55 PDT 2006 (1)
+ntpdate.*: ntpdate \d\.
+ntpd: ntpd shutdown succeeded
+ntpd: ntpd shutdown failed
+ntpd_initres.*: parent died before we finished, exiting
+
+opcagt:
+ovpa:
+
+OVTrcSrv: Starting OVTrcSrv
+
+# Not sure what this means, but it seems harmless
+pam_loginuid.*: set_loginuid failed opening loginuid
+pam_unix.*: session opened for user
+pam_unix.*: session closed for user
+pam_unix.*: check pass; user unknown
+pam_unix.*: bad username
+pam_unix.*: authentication failure
+pam_unix.*: service.* ignoring max retries
+
+pbs_server:
+PBS_Server:
+
+portmap: portmap startup succeeded
+portmap: portmap shutdown succeeded
+
+postfix:  succeeded
+postfix: Shutting down postfix:
+postfix: $
+postfix: ..60G.  $
+postfix: ..60G$
+postfix: .  $
+postfix: .  OK  .
+postfix:  failed$
+postfix: postfix stop failed
+
+readahead_early: Starting background readahead
+readahead: Starting background readahead
+
+rc: Starting dce-clean:  succeeded
+rc: Starting dkms_autoinstaller:  succeeded
+rc: Starting gcstartup:  succeeded
+rc: Stopping hpasm:  succeeded
+rc: Starting init.crs:  succeeded
+rc: Starting lm_sensors
+rc: Starting mptctl:  succeeded
+rc: Starting opcagt:  succeeded
+rc: Starting oracle:  succeeded
+rc: Starting ovpa:  succeeded
+rc: Starting OVTrcSrv:  succeeded
+rc: Starting pcmcia:  succeeded
+rc: Starting readahead_early:  succeeded
+rc: Starting readahead:  succeeded
+rc: Starting sysstat:  succeeded
+rc: Starting zOVCtrl:  succeeded
+rc.sysinit: -e
+rc.sysinit: Configuring kernel parameters:
+rc.sysinit: Setting clock
+rc.sysinit: Loading default keymap succeeded
+rc.sysinit: Setting hostname .* succeeded
+rc.sysinit: Remounting root filesystem
+rc.sysinit: Setting up Logical Volume Management: succeeded
+rc.sysinit: Checking root filesystem succeeded
+rc.sysinit: Checking filesystems succeeded
+rc.sysinit: Mounting local filesystems:  succeeded
+rc.sysinit: Enabling local filesystem quotas:  succeeded
+rc.sysinit: Enabling swap space:  succeeded
+rc.dcerpcd: rpcd shutdown succeeded
+# I don't really care if the OpenView agent didn't shut down properly
+rc.dcerpcd: rpcd shutdown failed
+
+reboot: rebooted by root
+
+rhnsd.*: running program /usr/sbin/rhn_check
+
+rpcidmapd: rpc.idmapd startup succeeded
+rpc.mountd: authenticated mount request from
+rpc.mountd: authenticated unmount request from
+rpc.mountd: Caught signal 15, un-registering and exiting
+rpc.statd.*: Version .* Starting
+# The web says this is a harmless bug in statd
+rpc.statd.*: Received erroneous SM_UNMON request
+rpc.statd.*: Caught signal 15, un-registering and exiting
+
+rsyncd.*: rsyncd version .* starting
+rsyncd.*: forward name lookup
+rsyncd.*: name lookup
+rsyncd.*: rsync allowed access on module
+rsyncd.*: rsync on .* from
+rsyncd.*: rsync to .* from
+rsyncd.*: wrote
+rsyncd.*: file has vanished:
+rsyncd.*: rsync warning: some files vanished before they could be transferred
+rsyncd.*: Unknown Parameter encountered:
+rsyncd.*: IGNORING unknown parameter
+rsyncd.*: unknown module
+rsyncd.*: Client is very old version of rsync, upgrade recommended
+rsyncd.*: send_files failed to open .*: No such file or directory
+rsyncd.*: readlink .*: No such file or directory
+rsyncd.*: rsync error: some files could not be transferred
+# Alerting over a threshold might be good here
+rsyncd.*: rsync: writefd_unbuffered failed to write
+rsyncd.*: rsync: read error: Connection reset by peer
+rsyncd.*: rsync: read error: Connection timed out
+rsyncd.*: rsync error: error in rsync protocol data stream
+rsyncd.*: rsync: connection unexpectedly closed
+
+runuser:
+
+sendmail: sendmail shutdown succeeded
+sendmail: sm-client shutdown succeeded
+sendmail: sendmail shutdown failed
+
+Server Administrator: Instrumentation Service EventID: \d+  Server Administrator starting
+Server Administrator: Instrumentation Service EventID: \d+  IPMI status  Interface: OS
+Server Administrator: Instrumentation Service EventID: \d+  Server Administrator startup complete
+Server Administrator: Storage Service EventID: \d+  The controller battery Learn cycle will start in 4 days
+Server Administrator: Storage Service EventID: \d+  The controller battery Learn cycle will start in 24 hours
+Server Administrator: Storage Service EventID: \d+  The controller battery Learn cycle has started
+Server Administrator: Storage Service EventID: \d+  Controller log file entry: Battery is discharging
+Server Administrator: Storage Service EventID: \d+  The controller battery is executing a Learn cycle
+Server Administrator: Storage Service EventID: \d+  The controller write policy has been changed to Write Through
+Server Administrator: Storage Service EventID: \d+  The virtual disk cache policy has changed
+Server Administrator: Storage Service EventID: \d+  The controller battery Learn cycle has completed
+Server Administrator: Storage Service EventID: \d+  The controller battery is charging
+Server Administrator: Storage Service EventID: \d+  The controller battery charge level is below a normal threshold
+Server Administrator: Storage Service EventID: \d+  The controller battery charge level is operating within normal limits
+Server Administrator: Storage Service EventID: \d+  The controller write policy has been changed to Write Back
+Server Administrator: Storage Service EventID: \d+  The battery charge cycle is complete
+
+shutdown: shutting down for system halt
+shutdown: shutting down for system reboot
+
+slurmctld.*:
+
+smartd.*: smartd startup
+smartd.*: smartd version
+smartd.*: Home page is
+smartd.*: Opened configuration file
+smartd.*: Configuration file
+smartd.*: System clock time adjusted to the past. Resetting next wakeup time.
+smartd.*: Unable to monitor any SMART enabled devices
+# Example: smartd[1732]: Device: /dev/sda, Temperature changed -4 Celsius to 22 Celsius since last report
+smartd.*: Device: .*, Temperature changed .* since last report 
+smartd.*: smartd received signal 15: Terminated
+smartd.*: smartd is exiting .exit status 0.
+smartd: smartd shutdown succeeded
+smartd: smartd shutdown failed
+
+snmpd: snmpd startup succeeded
+snmpd: snmpd shutdown succeeded
+snmpd: snmpd shutdown failed
+snmpd.*: NET-SNMP version
+snmpd.*: .smux_accept. accepted fd \d+ from
+snmpd.*: cmaX: listening for subagents
+snmpd.*: cmaX: sent ColdStarts
+snmpd.*: cmaX: subMIB .. will be sent on port \d+ to hp Advanced Server Management_Peer
+snmpd.*: accepted smux peer
+snmpd.*: Received SNMP packet
+snmpd.*: Got trap from peer
+snmpd.*: peer disconnected
+snmpd.*: Received TERM or STOP signal...  shutting down
+snmpd.*: truncating unsigned value
+snmpd.*: Connection from
+snmpd.*: transport socket
+# Not all boxes have a seperate /home filesystem
+snmpd.*: /etc/snmp/snmpd.conf: line \d+: Warning: Couldn't find device for disk /home
+snmpd.*: /proc/net/dev data format error
+snmpd.*: Creating directory: /var/net-snmp
+
+# Example: SQLAnywhere(hostname): Starting checkpoint of "monitordb" (monitordb.db) at Thu Mar 01 2007 04:12
+SQLAnywhere
+
+squid.*: Starting Squid Cache version
+squid.*: Process ID \d+
+squid.*: With \d+ file descriptors available
+squid.*: Performing DNS Tests
+squid.*: Successful DNS name lookup tests
+squid.*: DNS Socket created at 0.0.0.0, port \d+, FD \d+
+squid.*: Adding nameserver [\d\.]+ from /etc/resolv.conf
+squid.*: Unlinkd pipe opened on FD \d+
+squid.*: Swap maxSize \d+ KB, estimated \d+ objects
+squid.*: Target number of buckets: \d+
+squid.*: Using \d+ Store buckets
+squid.*: Max Mem  size: \d+ KB
+squid.*: Max Swap size: \d+ KB
+squid.*: Local cache digest enabled; rebuild/rewrite every \d+/\d+ sec
+squid.*: Rebuilding storage in
+squid.*: Using Least Load store dir selection
+squid.*: Set Current Directory to
+squid.*: Loaded Icons
+squid.*: Accepting HTTP connections at 0.0.0.0, port \d+, FD \d+
+squid.*: WCCP Disabled
+squid.*: Ready to serve requests
+squid.*: Done reading .* swaplog
+squid.*: Finished rebuilding storage from disk
+squid.*: \s*\d+ Entries scanned
+squid.*:         0 Invalid entries
+squid.*:         0 With invalid flags
+squid.*: \s*\d+ Objects loaded
+squid.*:         0 Objects expired
+squid.*:         0 Objects cancelled
+squid.*:         0 Duplicate URLs purged
+squid.*:         0 Swapfile clashes avoided
+squid.*:   Took [\d\.]+ seconds
+squid.*: Beginning Validation Procedure
+squid.*:   Completed Validation Procedure
+squid.*:   Validated \d+ Entries
+squid.*:   store_swap_size = \d+k
+squid.*: storeLateRelease: released 0 objects
+# Example: squid[26775]: CACHEMGR: <unknown>@127.0.0.1 requesting 'info'
+squid.*: CACHEMGR: .* requesting
+squid.*: Preparing for shutdown
+squid.*: Waiting 30 seconds for active connections to finish
+squid.*: FD \d+ Closing HTTP connection
+squid.*: Shutting down
+squid.*: Closing unlinkd pipe on FD \d+
+squid.*: storeDirWriteCleanLogs: Starting
+squid.*:   Finished.  Wrote \d+ entries
+squid.*:   Took [\d\.]+ seconds
+squid.*: Squid Cache .*: Exiting normally
+squid.*: Squid Parent: child process \d+ exited with status \d+
+squid.*: Squid Parent: child process \d+ started
+
+sshd: $
+sshd.*: Accepted publickey for
+sshd.*: Accepted rsa for
+sshd.*: Accepted password for
+sshd.*: Accepted keyboard-interactive/pam for
+sshd.*: Failed publickey for
+sshd.*: Failed rsa for
+sshd.*: Failed password for
+sshd.*: Failed keyboard-interactive for
+sshd.*: Failed keyboard-interactive/pam for
+sshd.*: Failed gssapi-with-mic for
+sshd.*: \d+ more authentication failure
+sshd.*: Did not receive identification string from
+sshd.*: User .* not allowed because not listed in AllowUsers
+sshd.*: channel \d+: open failed: administratively prohibited: open failed
+sshd.*: error: PAM: authentication error for
+sshd.*: fatal: Timeout before authentication
+sshd.*: fatal: Cannot bind any address
+sshd.*: Bad protocol version identification .* from
+# Alerting over a threshold might be good here
+sshd.*: fatal: Write failed: Connection reset by peer
+sshd.*: fatal: Write failed: Broken pipe
+sshd.*: fatal: Read from socket failed: Connection reset by peer
+sshd.*: fatal: buffer_get: trying to get more bytes \d+ than in buffer
+sshd.*: error: ssh_msg_send: write
+sshd.*: error: key_read: uudecode
+sshd.*: error: RSA_public_decrypt failed:
+sshd.*: Read error from remote host
+sshd.*: authentication failure
+sshd.*: reverse mapping checking getaddrinfo for .* failed
+sshd.*: Authentication tried for .* with correct key but not from a permitted host
+sshd.*: Authentication refused: bad ownership or modes for file
+sshd.*: Authentication refused: bad ownership or modes for directory
+sshd.*: Server listening on 0.0.0.0 port 22
+sshd.*: Server listening on :: port 22
+sshd.*: Generating \d+ bit RSA key
+sshd.*: RSA key generation complete
+sshd.*: subsystem request for sftp
+sshd.*: error: Bind to port \d+ on 0.0.0.0 failed: Address already in use
+sshd.*: error: bind: Address already in use
+sshd.*: bind: Address already in use
+sshd.*: socket: Address family not supported by protocol
+sshd.*: error: channel_setup_fwd_listener: cannot listen to port:
+sshd.*: error: accept: Software caused connection abort
+sshd.*: error: getsockname failed: Connection reset by peer
+sshd.*: Illegal user
+sshd.*: Failed none for illegal user
+sshd.*: Invalid user
+sshd.*: Connection closed by
+sshd.*: Disconnecting: Command terminated on signal
+sshd.*: Disconnecting: Timeout, your session not responding
+sshd.*: syslogin_perform_logout: logout.. returned an error
+sshd.*: Received disconnect from
+sshd.*: debug
+sshd.*: Received signal 15; terminating
+sshd.*: Received SIGHUP; restarting
+sshd:  succeeded
+sshd: sshd -TERM succeeded
+sshd: sshd shutdown failed
+#
+# these are from sshd verbose logging
+sshd.*: Found matching .* key
+sshd.*: Failed none
+sshd.*: Postponed
+sshd.*: Setting tty modes failed
+sshd.*: session opened for user
+sshd.*: Closing connection
+sshd.*: Connection from
+sshd.*: Generating new .* key
+sshd.*: .* key generation complete
+# pam/audit related?
+sshd.*: set_loginuid failed opening loginuid
+
+start_udev: Starting udev:
+
+stunnel.*: .* connected from
+stunnel.*: Connection closed
+stunnel.*: Connection reset:
+# Example: stunnel[1596]: stunnel 4.05 on x86_64-redhat-linux-gnu PTHREAD+LIBWRAP with OpenSSL 0.9.7a Feb 19 2003
+stunnel.*: stunnel .* on .* with OpenSSL
+# Example: stunnel[1596]: FD_SETSIZE=1024, file ulimit=1024 -> 500 clients allowed
+stunnel.*: FD_SETSIZE=\d+, file ulimit=\d+ -> \d+ clients allowed
+
+# Example: su: a to b on /dev/ttypg
+su: .* to .* on
+sudo:
+sudo.*:
+
+sysctl:
+
+syslog: klogd startup succeeded
+syslog: klogd shutdown succeeded
+exiting on signal 15
+syslog.*: restart
+syslog: syslogd startup succeeded
+syslog: syslogd shutdown succeeded
+syslogd: sendto: Network is unreachable
+
+sysstat: Calling the system activity data collector
+sysstat:  $
+
+thttpd.*:
+
+udevsend.*: starting udevd daemon
+
+useradd.*:
+
+userhelper.*: running
+userhelper: pam_timestamp: updated timestamp file
+
+vmware-authd.*:
+
+vncserver: vncserver shutdown succeeded
+
+wall.*: wall: user .* broadcasted \d+ lines
+
+xinetd: xinetd startup succeeded
+xinetd: xinetd shutdown succeeded
+xinetd.*: Exiting
+xinetd.*: Reading included configuration file:
+xinetd.*: removing
+xinetd.*: xinetd Version .* started
+xinetd.*: Started working: \d+ available services
+xinetd.*: Starting reconfiguration
+xinetd.*: readjusting service
+xinetd.*: Reconfigured:
+xinetd.*: Swapping defaults
+xinetd.*: START:
+xinetd.*: EXIT:
+# Alerting over a threshold might be good here
+xinetd.*: warning: can't get client address: Connection reset by peer
+xinetd: xinetd -HUP succeeded
+
+xfs: xfs startup succeeded
+xfs.*: ignoring font path element
+xfs.*: terminating
+xfs: xfs shutdown succeeded
+
+ypbind: ypbind shutdown failed
+
