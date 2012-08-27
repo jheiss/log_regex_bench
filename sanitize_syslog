@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+
+server = ARGV[1]
+domain = ARGV[2]
+
+File.foreach(ARGV[0]) do |line|
+  line.gsub!(server, 'hostname')
+  line.gsub!(domain, 'example.com')
+  # http://tools.ietf.org/html/rfc5737
+  line.gsub!(/\d+\.\d+\.\d+\.\d+/, '192.0.2.0')
+
+  line.gsub!(/user=<[^>]+>/, 'user=<username>')
+  line.gsub!(/dovecot: imap\([^\)]+\):/, 'dovecot: imap(username):')
+  if line =~ /dovecot: .* file (.+): Permission denied/
+    line.gsub!($1, '/path/to/mail/box')
+  end
+  if line =~ /dovecot: .* file (.+): Broken virtual size/
+    line.gsub!($1, '/path/to/mail/box')
+  end
+  if line =~ /dovecot: .* file (.+): Broken MIME parts/
+    line.gsub!($1, '/path/to/mail/box')
+  end
+  if line =~ /dovecot: .* file (.+) at/
+    line.gsub!($1, '/path/to/mail/box')
+  end
+  line.gsub!(/UID \d+/, 'UID 12345')
+
+  if line =~ /sendmail\[\d+\]: .* (?:to|from)=<([^>]+)>/
+    line.gsub!($1, 'username@example.com')
+  end
+  if line =~ /sendmail\[\d+\]: .* to=(\S+)/
+    line.gsub!($1, 'username')
+  end
+  if line =~ /sendmail\[\d+\]: .* ctladdr=<([^>]+)>/
+    line.gsub!($1, 'username@example.com')
+  end
+  if line =~ /sendmail\[\d+\]: .* relay=(\S+)/
+    relay = $1
+    if relay.include?('@')
+      line.gsub!(relay, 'username@example.com')
+    else
+      line.gsub!(relay, 'relay.example.com')
+    end
+  end
+  if line =~ /sendmail\[\d+\]: .* authid=(\S+)/
+    line.gsub!($1, 'username')
+  end
+  if line =~ /sendmail\[\d+\]: .* msgid=(\S+),/
+    line.gsub!($1, '1234.5678usernameexample.com@www.example.com')
+  end
+  if line =~ /sendmail\[\d+\]: .* Authentication-Warning: .* (\S+) set sender to (\S+) using/
+    user = $1
+    to = $2
+    line.gsub!(user, 'username')
+    line.gsub!(to, 'username')
+  end
+
+  if line =~ /spamd: processing message <([^>]+)>/
+    line.gsub!($1, '1234.5678usernameexample.com@www.example.com')
+  end
+  if line =~ /spamd: result: .*mid=<([^>]+)>/
+    line.gsub!($1, '1234.5678usernameexample.com@www.example.com')
+  end
+
+  if line =~ /saslauthd\[\d+\]: .* \[user=([^\]]+)\]/
+    line.gsub!($1, 'username')
+  end
+
+  line.gsub!(
+    /CROND\[\d+\]: \([^\)]+\) CMD \([^\)]+\)/,
+    'CROND[1234]: (username) CMD (/path/to/cron/job)')
+  line.gsub!(
+    /run-parts\([^\)]+\)\[\d+\]: (starting|finished) .*/,
+    "run-parts(/path/to/cron/job)[1234]: #{$1} cronjob")
+
+  if line =~ /automount\[\d+\]: .* ask umount returned busy (.*)/
+    line.gsub!($1, '/path/to/automounted/volume')
+  end
+
+  print line
+end
+
