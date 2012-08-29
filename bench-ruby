@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+
+corpus = ARGV[0] ? ARGV[0] : 'corpus-syslog'
+
+# Load the regexs
+alert = []
+File.foreach('regex-alert') do |line|
+  line.chomp!
+  # Skip comments and blank lines
+  next if line =~ /^\s*#/
+  next if line =~ /^\s*$/
+  alert << Regexp.new(line)
+end
+suppress = []
+File.foreach('regex-suppress') do |line|
+  line.chomp!
+  # Skip comments and blank lines
+  next if line =~ /^\s*#/
+  next if line =~ /^\s*$/
+  suppress << Regexp.new(line)
+end
+
+starttime = Time.now
+
+# Apply regexs to corpus, counting hits and misses
+alert_count = 0
+suppress_count = 0
+limbo_count = 0
+File.foreach(corpus) do |line|
+  matched = false
+  alert.each do |a|
+    if line =~ a
+      alert_count += 1
+      matched = true
+      break
+    end
+  end
+  next if matched
+  suppress.each do |s|
+    if line =~ s
+      suppress_count += 1
+      matched = true
+      break
+    end
+  end
+  next if matched
+  limbo_count += 1
+end
+
+endtime = Time.now
+
+# Print time and counters
+puts "Elapsed time: #{endtime - starttime}"
+puts "Alert: #{alert_count}"
+puts "Suppress: #{suppress_count}"
+puts "Limbo: #{limbo_count}"
+

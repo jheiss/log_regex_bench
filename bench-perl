@@ -1,0 +1,62 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use Time::HiRes qw( time );
+
+my $corpus = $ARGV[0] ? $ARGV[0] : 'corpus-syslog';
+
+# Load the regexs
+my @alert;
+open(my $afh, '<', 'regex-alert') or die;
+while(my $line = <$afh>) {
+  chomp($line);
+  # Skip comments and blank lines
+  next if $line =~ /^\s*#/;
+  next if $line =~ /^\s*$/;
+  push(@alert, qr/$line/);
+}
+close($afh);
+my @suppress;
+open(my $sfh, '<', 'regex-suppress') or die;
+while(my $line = <$sfh>) {
+  chomp($line);
+  # Skip comments and blank lines
+  next if $line =~ /^\s*#/;
+  next if $line =~ /^\s*$/;
+  push(@suppress, qr/$line/);
+}
+close($sfh);
+
+my $starttime = time;
+
+# Apply regexs to corpus, counting hits and misses
+my $alert_count;
+my $suppress_count;
+my $limbo_count;
+open(my $cfh, '<', $corpus) or die;
+LINE: while(my $line = <$cfh>) {
+  foreach my $alert (@alert) {
+    if ($line =~ $alert) {
+      $alert_count++;
+      next LINE;
+    }
+  }
+  foreach my $suppress (@suppress) {
+    if ($line =~ $suppress) {
+      $suppress_count++;
+      next LINE;
+    }
+  }
+  $limbo_count++;
+}
+close($cfh);
+
+my $endtime = time;
+
+# Print time and counters
+print 'Elapsed time: ', $endtime - $starttime, "\n";
+print "Alert: $alert_count\n";
+print "Suppress: $suppress_count\n";
+print "Limbo: $limbo_count\n";
+
