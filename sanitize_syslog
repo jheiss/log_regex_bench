@@ -4,10 +4,14 @@ server = ARGV[1]
 domain = ARGV[2]
 
 File.foreach(ARGV[0]) do |line|
+  next if !line.valid_encoding?
+
   line.gsub!(server, 'hostname')
   line.gsub!(domain, 'example.com')
   # http://tools.ietf.org/html/rfc5737
   line.gsub!(/\d+\.\d+\.\d+\.\d+/, '192.0.2.0')
+  # Standard for example MAC addrs?
+  line.gsub!(/\h{2}:\h{2}:\h{2}:\h{2}:\h{2}:\h{2}/, 'aa:aa:aa:aa:aa:aa')
 
   line.gsub!(/user=<[^>]+>/, 'user=<username>')
   line.gsub!(/dovecot: imap\([^\)]+\):/, 'dovecot: imap(username):')
@@ -75,6 +79,242 @@ File.foreach(ARGV[0]) do |line|
 
   if line =~ /automount\[\d+\]: .* ask umount returned busy (.*)/
     line.gsub!($1, '/path/to/automounted/volume')
+  end
+  
+  #
+  # Mac OS X
+  #
+  
+  if line =~ /com.apple.mtmd\[\d+\]: (?:stat|open) on ([^:]+):/
+    line.sub!($1, '/path/to/file')
+  end
+
+  if line =~ /Google Chrome\[\d+\]: Cannot find function pointer .* <(.*)>/
+    line.sub!($1, '/path/to/chrome/plugin')
+  end
+  if line =~ /Google Chrome Helper\[\d+\]: FolderManager: Failed looking up user domain root; url='(.*)' path=(.*) err=-120 uid=(\d+) euid=(\d+)/
+    url = $1
+    path = $2
+    uid = $3
+    euid = $4
+    line.sub!(url, 'file://localhost/Users/username/')
+    line.sub!(path, '/Users/username/')
+    line.sub!(uid, '12345')
+    line.sub!(euid, '12345')
+  end
+
+  # CalendarAgent
+  if line =~ /NSErrorFailingURLStringKey=(\S+),/
+      line.sub!($1, 'http://example.com/calendar')
+    end
+  if line =~ /NSErrorFailingURLKey=(\S+),/
+      line.sub!($1, 'http://example.com/calendar')
+    end
+  if line =~ /AccountName=(.+)[,}]/
+    line.sub!($1, 'username@example.com')
+  end
+  if line =~ /CalendarAgent\[\d+\]: .* \[Account (.*) timed out/
+    line.sub!($1, 'username@example.com@http://example.com/calendar')
+  end
+  if line =~ /Principal URL: \[([^]]*)\]/
+    line.sub!($1, '/calendar/url')
+  end
+  if line =~ /calendarPath = \\"([^\\]*)\\";/
+    line.sub!($1, '/calendar/path')
+  end
+  if line =~ /ownerPrincipalPath = \\"([^\\]*)\\";/
+    line.sub!($1, '/calendar/owner/path')
+  end
+  if line =~ /failed to write to file (.*) with userInfo/
+    line.sub!($1, '/path/to/bad/calendar/file')
+  end
+
+  if line =~ /in (?:pam_sm_authenticate|pam_sm_setcred)\(\): Got r?user: (.*)/
+    line.sub!($1, 'username')
+  end
+  if line =~ /in pam_sm_setcred\(\): pam_sm_setcred: krb5 user (.*) doesn't have a principal/
+    line.sub!($1, 'username')
+  end
+
+  if line =~ /com.apple.SecurityServer\[\d+\]: UID (\d+) authenticated as user (.*) \(UID (\d+)\) for right '(.*)'/
+    uid1 = $1
+    username = $2
+    uid2 = $3
+    right = $4
+    line.sub!(uid1, '12345')
+    line.sub!(username, 'username')
+    line.sub!(uid2, '12345')
+    line.sub!(right, 'com.example.right')
+  end
+  if line =~ /com.apple.SecurityServer\[\d+\]: Succeeded authorizing right (.*) by client '(.*)' \[\d+\] for authorization created by '(.*)' \[/
+    right = $1
+    app1 = $2
+    app2 = $3
+    line.sub!(right, 'com.example.right')
+    line.sub!(app1, '/path/to/app')
+    line.sub!(app2, '/path/to/app')
+  end
+
+  if line =~ /SecurityAgent\[\d+\]: User info context values set for (.*)/
+    line.sub!($1, 'username')
+  end
+
+  if line =~ /ReportCrash\[\d+\]: Saved crash report for .* to (.*)/
+    line.sub!($1, '/path/to/crash/report')
+  end
+
+  if line =~ /sandboxd\[\d+\] \(\[\d+\]\): .* deny file-read-data (.*)/
+    line.sub!($1, '/path/to/denied/file')
+  end
+  if line =~ /sandboxd\[\d+\] \(\[\d+\]\): .* deny file-read-xattr (.*) \(/
+    line.sub!($1, '/path/to/denied/file')
+  end
+  if line =~ /sandboxd\[\d+\] \(\[\d+\]\): .* deny file-write-owner (.*) \(/
+    line.sub!($1, '/path/to/denied/file')
+  end
+  if line =~ /sandboxd\[\d+\] \(\[\d+\]\): .* deny file-write-create (.*)/
+    line.sub!($1, '/path/to/denied/file')
+  end
+
+  if line =~ /Shimo\[\d+\]: SSHSlave -- identity file (.*) type/
+    line.sub!($1, '/path/to/ssh/key')
+  end
+  if line =~ /Shimo\[\d+\]: SSHSlave -- Found key in (.*):\d+/
+    line.sub!($1, '/path/to/ssh/known_hosts')
+  end
+  if line =~ /Shimo\[\d+\]: SSHSlave -- Trying private key: (.*)/
+    line.sub!($1, '/path/to/ssh/key')
+  end
+  if line =~ /Shimo\[\d+\]: SSHSlave -- Offering (?:DSA|RSA) public key: (.*)/
+    line.sub!($1, '/path/to/ssh/key')
+  end
+  if line =~ /Shimo\[\d+\]: Checking file:\/\/localhost\/(.*) \.\.\./
+    line.sub!($1, '/path/to/shimo')
+  end
+
+  if line =~ /xpcd\[\d+\]: restored permissions .* on (.*)/
+    line.sub!($1, '/path/to/restored/file')
+  end
+
+  if line =~ /shutdown\[\d+\]: reboot by (.*):/
+    line.sub!($1, 'username')
+  end
+
+  if line =~ /com.apple.launchd.peruser.(\d+)\[\d+\] \(com.apple.CSConfigDotMacCert-(.*)-SharedServices/
+    uid = $1
+    dotmac = $2
+    line.sub!(uid, '12345')
+    line.sub!(dotmac, 'username@me.com')
+  end
+
+  if line =~ /Adobe AIR Installer\[\d+\]: Unpackaging .* to (.*)/
+    line.sub!($1, '/path/to/adobe/air')
+  end
+  if line =~ /Adobe AIR Installer\[\d+\]: Launching subprocess with commandline (.*)/
+    line.sub!($1, '/path/to/adobe/air')
+  end
+
+  if line =~ /The domain\/default pair of \((.*), .*\) does not exist/
+    line.sub!($1, '/path/to/xquartz/config')
+  end
+  if line =~ /org.macosforge.xquartz.startx\[\d+\]: xauth:  file (.*) does not exist/
+    line.sub!($1, '/path/to/xquartz/serverauth')
+  end
+
+  if line =~ /sudo\[\d+\]: (.*) : TTY=.* ; PWD=(.*) ; USER=(.*) ; COMMAND=(.*)/
+    username = $1
+    pwd = $2
+    sudoto = $3
+    cmd = $4
+    line.sub!(username, 'username')
+    line.sub!(pwd, '/Users/username')
+    line.sub!(sudoto, 'root')
+    line.sub!(cmd, '/path/to/command/run/via/sudo')
+  end
+  if line =~ /sudo\[\d+\]: (.*) : no tty present and no askpass program specified ; TTY=.* ; PWD=(.*) ; USER=(.*) ; COMMAND=(.*)/
+    username = $1
+    pwd = $2
+    sudoto = $3
+    cmd = $4
+    line.sub!(username, 'username')
+    line.sub!(pwd, '/Users/username')
+    line.sub!(sudoto, 'root')
+    line.sub!(cmd, '/path/to/command/run/via/sudo')
+  end
+
+  if line =~ /sshd\[\d+\]: Accepted publickey for (.*) from/
+    line.sub!($1, 'username')
+  end
+
+  if line =~ /KernelEventAgent\[\d+\]: .* mounted on '(.*)', from '(.*)',/
+    mountpoint = $1
+    source = $2
+    line.sub!(mountpoint, '/Volumes/volume')
+    line.sub!(source, '//username@example.com/volume')
+  end
+  if line =~ /KernelEventAgent\[\d+\]: .* force unmount (.*) from (.*)/
+    source = $1
+    mountpoint = $2
+    line.sub!(source, '//username@example.com/volume')
+    line.sub!(mountpoint, '/Volumes/volume')
+  end
+
+  if line =~ /mds\[\d+\]: \((.*)\)\(Error\) IndexStore in void preProcess.* = (.*)/
+    path1 = $1
+    path2 = $2
+    line.sub!(path1, '/path/to/mds/error/one')
+    line.sub!(path2, '/path/to/mds/error/two')
+  end
+  if line =~ /mds\[\d+\]: \((.*)\)\(Error\) IndexPath in oid_t .* = (.*)/
+    path1 = $1
+    path2 = $2
+    line.sub!(path1, '/path/to/mds/error/one')
+    line.sub!(path2, '/path/to/mds/error/two')
+  end
+  if line =~ /mdworker\[\d+\]: iCal.mdimporter: could not find component keys: (.*)/
+    line.sub!($1, '/path/to/mds/ical/error')
+  end
+  if line =~ /mdworker\[\d+\]: FontImporter: Validation failed - "(.*)"/
+    line.sub!($1, '/path/to/mds/font/error')
+  end
+  if line =~ /mdworker\[\d+\]: zip importer encountered an error \(3\) scanning "(.*)"/
+    line.sub!($1, '/path/to/mds/zip/error')
+  end
+
+  if line =~ /com.apple.backupd\[\d+\]: Deep event scan at path:(.*) reason:/
+    line.sub!($1, '/path/to/backupd/deep/scan/file')
+  end
+
+  if line =~ /GitHub\[\d+\]: Invalid URL passed to an open\/save panel: '(.*)'.  Using '(.*)' instead./
+    badurl = $1
+    goodurl = $2
+    line.sub!(badurl, '/path/to/github/bad/file')
+    line.sub!(goodurl, 'file://localhost/path/to/github/good/file')
+  end
+
+  if line =~ /SubmitDiagInfo\[\d+\]: Removed expired (?:plist )?file file:\/\/localhost\/(.*)/
+    line.sub!($1, 'path/to/submitdiaginfo/file')
+  end
+  if line =~ /SubmitDiagInfo\[\d+\]: Submitted crash report: file:\/\/localhost\/(.*)/
+    line.sub!($1, 'path/to/submitdiaginfo/file')
+  end
+
+  if line =~ /Messages\[\d+\]: Message marked as read came back as unread\! InstantMessage\[from=(.*); msg-subject=(.*); account/
+    from = $1
+    subject = $2
+    line.sub!(from, 'username@example.com')
+    line.sub!(subject, 'someone@example.com')
+  end
+
+  if line =~ /imagent\[\d+\]: .*uri=mailto%3A(.*)/
+    line.sub!($1, 'username%40example.com')
+  end
+
+  if line =~ /com.apple.quicklook.satellite\[\d+\]: .* "The file .(.*). couldn.t be opened because there is no such file." .*NSFilePath=(.*), NSUnderlyingError/
+    file = $1
+    filepath = $2
+    line.sub!(file, 'filename')
+    line.sub!(filepath, '/path/to/quicklook/error/file')
   end
 
   print line
