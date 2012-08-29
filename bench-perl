@@ -6,34 +6,15 @@ use Time::HiRes qw( time );
 
 my $corpus = $ARGV[0] ? $ARGV[0] : 'corpus-syslog';
 
-# Load the regexs
-my @alert;
-open(my $afh, '<', 'regex-alert') or die;
-while(my $line = <$afh>) {
-  chomp($line);
-  # Skip comments and blank lines
-  next if $line =~ /^\s*#/;
-  next if $line =~ /^\s*$/;
-  push(@alert, qr/$line/);
-}
-close($afh);
-my @suppress;
-open(my $sfh, '<', 'regex-suppress') or die;
-while(my $line = <$sfh>) {
-  chomp($line);
-  # Skip comments and blank lines
-  next if $line =~ /^\s*#/;
-  next if $line =~ /^\s*$/;
-  push(@suppress, qr/$line/);
-}
-close($sfh);
+my @alert = load_regex_file('regex-alert');
+my @suppress = load_regex_file('regex-suppress');
 
 my $starttime = time;
 
-# Apply regexs to corpus, counting hits and misses
-my $alert_count;
-my $suppress_count;
-my $limbo_count;
+# Apply regexes to corpus, counting hits and misses
+my $alert_count = 0;
+my $suppress_count = 0;
+my $limbo_count = 0;
 open(my $cfh, '<', $corpus) or die;
 LINE: while(my $line = <$cfh>) {
   foreach my $alert (@alert) {
@@ -59,4 +40,23 @@ print 'Elapsed time: ', $endtime - $starttime, "\n";
 print "Alert: $alert_count\n";
 print "Suppress: $suppress_count\n";
 print "Limbo: $limbo_count\n";
+
+#
+# Subroutines
+#
+
+sub load_regex_file {
+  my ($file) = @_;
+  my @regexes;
+  open(my $fh, '<', $file) or die;
+  while(my $line = <$fh>) {
+    chomp($line);
+    # Skip comments and blank lines
+    next if $line =~ /^\s*#/;
+    next if $line =~ /^\s*$/;
+    push(@regexes, qr/$line/);
+  }
+  close($fh);
+  return(@regexes);
+}
 

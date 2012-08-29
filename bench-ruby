@@ -2,27 +2,24 @@
 
 corpus = ARGV[0] ? ARGV[0] : 'corpus-syslog'
 
-# Load the regexs
-alert = []
-File.foreach('regex-alert') do |line|
-  line.chomp!
-  # Skip comments and blank lines
-  next if line =~ /^\s*#/
-  next if line =~ /^\s*$/
-  alert << Regexp.new(line)
+def load_regex_file(file)
+  regexes = []
+  File.foreach(file) do |line|
+    line.chomp!
+    # Skip comments and blank lines
+    next if line =~ /^\s*#/
+    next if line =~ /^\s*$/
+    regexes << Regexp.new(line)
+  end
+  regexes
 end
-suppress = []
-File.foreach('regex-suppress') do |line|
-  line.chomp!
-  # Skip comments and blank lines
-  next if line =~ /^\s*#/
-  next if line =~ /^\s*$/
-  suppress << Regexp.new(line)
-end
+
+alert = load_regex_file('regex-alert')
+suppress = load_regex_file('regex-suppress')
 
 starttime = Time.now
 
-# Apply regexs to corpus, counting hits and misses
+# Apply regexes to corpus, counting hits and misses
 alert_count = 0
 suppress_count = 0
 limbo_count = 0
