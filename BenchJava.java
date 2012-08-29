@@ -56,7 +56,7 @@ class BenchJava {
     
     Date endTime = new Date();
     
-    System.out.println("Elapsed time: " + ((endTime.getTime() - startTime.getTime()) / 1000));
+    System.out.println("Elapsed time: " + ((endTime.getTime() - startTime.getTime()) / 1000.0));
     System.out.println("Alert: " + alertCount);
     System.out.println("Suppress: " + suppressCount);
     System.out.println("Limbo: " + limboCount);
