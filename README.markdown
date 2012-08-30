@@ -19,3 +19,9 @@ This project aims to benchmark the regular expression functionality of
 common programming languages to see if there are languages that would be
 best for this application.
 
+# Improvements Welcome #
+
+My intention is to fairly compare various languages for the log
+monitoring use case, so if you see places where the code could be
+improved for performance let me know through an issue or pull request.
+
