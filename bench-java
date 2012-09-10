@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+if [ ! -f BenchJava.class ]; then
+  javac BenchJava.java
+fi
+
+java BenchJava
+
