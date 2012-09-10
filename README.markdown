@@ -3,8 +3,8 @@
 In running large Unix environments I've found it useful to watch for and
 alert on syslog messages indicating problems.  The easiest way to do
 this is to have a list of regular expressions for messages you know to
-be problems.  Addtionally it can be useful to maintain a list of regular
-expressions for messages that you known to not be problems.  Anything
+be problems.  Additionally it can be useful to maintain a list of regular
+expressions for messages that you know are not problems.  Anything
 not matching either list represents a message you haven't seen before,
 which can be set aside in a file for occasional review for new types of
 problem messages.
