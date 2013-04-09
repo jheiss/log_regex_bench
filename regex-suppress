@@ -1152,4 +1152,3 @@ xfs.*: terminating
 xfs: xfs shutdown succeeded
 
 ypbind: ypbind shutdown failed
-

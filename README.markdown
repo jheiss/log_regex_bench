@@ -24,4 +24,3 @@ best for this application.
 My intention is to fairly compare various languages for the log
 monitoring use case, so if you see places where the code could be
 improved for performance let me know through an issue or pull request.
-

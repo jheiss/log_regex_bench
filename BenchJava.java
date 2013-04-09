@@ -87,4 +87,3 @@ class BenchJava {
     return(regexes);
   }
 }
-

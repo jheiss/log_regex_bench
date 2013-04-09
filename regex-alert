@@ -66,4 +66,3 @@ Server Administrator: Storage Service EventID: \d+  Array disk Rebuild completed
 Server Administrator: Instrumentation Service EventID: \d+  Temperature sensor detected a warning value
 Server Administrator: Instrumentation Service EventID: \d+  Temperature sensor detected a failure value
 Server Administrator: Instrumentation Service EventID: \d+  Temperature sensor returned to a normal value
-

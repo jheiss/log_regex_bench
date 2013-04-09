@@ -55,4 +55,3 @@ print("Elapsed time: {0}".format(endtime - starttime))
 print("Alert: {0}".format(alert_count))
 print("Suppress: {0}".format(suppress_count))
 print("Limbo: {0}".format(limbo_count))
-

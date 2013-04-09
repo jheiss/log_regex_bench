@@ -7,4 +7,3 @@ if [ ! -f BenchJava.class ]; then
 fi
 
 java BenchJava
-

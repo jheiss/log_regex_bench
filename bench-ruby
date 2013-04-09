@@ -51,4 +51,3 @@ puts "Elapsed time: #{endtime - starttime}"
 puts "Alert: #{alert_count}"
 puts "Suppress: #{suppress_count}"
 puts "Limbo: #{limbo_count}"
-

@@ -59,4 +59,3 @@ sub load_regex_file {
   close($fh);
   return(@regexes);
 }
-
