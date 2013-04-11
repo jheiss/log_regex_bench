@@ -4,7 +4,44 @@ import sys
 import re
 import time
 
-corpus = sys.argv[1] if len(sys.argv) >= 2 else 'corpus-syslog'
+def main():
+    corpus = sys.argv[1] if len(sys.argv) >= 2 else 'corpus-syslog'
+    
+    alert = load_regex_file('regex-alert')
+    suppress = load_regex_file('regex-suppress')
+    
+    starttime = time.clock()
+    
+    # Apply regexes to corpus, counting hits and misses
+    alert_count = 0
+    suppress_count = 0
+    limbo_count = 0
+    f = open(corpus)
+    for line in f:
+        matched = False
+        for a in alert:
+            if a.search(line):
+                alert_count += 1
+                matched = True
+                break
+        if matched:
+            continue
+        for s in suppress:
+            if s.search(line):
+                suppress_count += 1
+                matched = True
+                break
+        if matched:
+            continue
+        limbo_count += 1
+    
+    endtime = time.clock()
+    
+    # Print time and counters
+    print("Elapsed time: {0}".format(endtime - starttime))
+    print("Alert: {0}".format(alert_count))
+    print("Suppress: {0}".format(suppress_count))
+    print("Limbo: {0}".format(limbo_count))
 
 def load_regex_file(file):
     regexes = []
@@ -20,38 +57,4 @@ def load_regex_file(file):
     f.close()
     return(regexes)
 
-alert = load_regex_file('regex-alert')
-suppress = load_regex_file('regex-suppress')
-
-starttime = time.clock()
-
-# Apply regexes to corpus, counting hits and misses
-alert_count = 0
-suppress_count = 0
-limbo_count = 0
-f = open(corpus)
-for line in f:
-    matched = False
-    for a in alert:
-        if a.search(line):
-            alert_count += 1
-            matched = True
-            break
-    if matched:
-        continue
-    for s in suppress:
-        if s.search(line):
-            suppress_count += 1
-            matched = True
-            break
-    if matched:
-        continue
-    limbo_count += 1
-
-endtime = time.clock()
-
-# Print time and counters
-print("Elapsed time: {0}".format(endtime - starttime))
-print("Alert: {0}".format(alert_count))
-print("Suppress: {0}".format(suppress_count))
-print("Limbo: {0}".format(limbo_count))
+main()
