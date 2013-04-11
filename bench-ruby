@@ -4,15 +4,19 @@ def main
   corpus = ARGV[0] ? ARGV[0] : 'corpus-syslog'
   
   alert = load_regex_file('regex-alert')
+  puts "Loaded #{alert.length} alert"
   suppress = load_regex_file('regex-suppress')
+  puts "Loaded #{suppress.length} suppress"
   
   starttime = Time.now
   
   # Apply regexes to corpus, counting hits and misses
+  total_count = 0
   alert_count = 0
   suppress_count = 0
   limbo_count = 0
   File.foreach(corpus) do |line|
+    total_count += 1
     matched = false
     alert.each do |a|
       if line =~ a

@@ -8,16 +8,20 @@ def main():
     corpus = sys.argv[1] if len(sys.argv) >= 2 else 'corpus-syslog'
     
     alert = load_regex_file('regex-alert')
+    print("Loaded {0} alert".format(len(alert)))
     suppress = load_regex_file('regex-suppress')
+    print("Loaded {0} suppress".format(len(suppress)))
     
     starttime = time.clock()
     
     # Apply regexes to corpus, counting hits and misses
+    total_count = 0
     alert_count = 0
     suppress_count = 0
     limbo_count = 0
     f = open(corpus)
     for line in f:
+        total_count += 1
         matched = False
         for a in alert:
             if a.search(line):
@@ -39,6 +43,7 @@ def main():
     
     # Print time and counters
     print("Elapsed time: {0}".format(endtime - starttime))
+    print("Total: {0}".format(total_count))
     print("Alert: {0}".format(alert_count))
     print("Suppress: {0}".format(suppress_count))
     print("Limbo: {0}".format(limbo_count))

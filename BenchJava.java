@@ -11,11 +11,14 @@ class BenchJava {
     String corpus = args.length > 0 ? args[0] : "corpus-syslog";
     
     ArrayList<Matcher> alertList = loadRegexFile("regex-alert");
+    System.out.println("Loaded " + alertList.size() + " alert");
     ArrayList<Matcher> suppressList = loadRegexFile("regex-suppress");
+    System.out.println("Loaded " + suppressList.size() + " suppress");
     
     Date startTime = new Date();
     
     // Apply regexes to corpus, counting hits and misses
+    int totalCount = 0;
     int alertCount = 0;
     int suppressCount = 0;
     int limboCount = 0;
@@ -24,6 +27,7 @@ class BenchJava {
          = new BufferedReader(new FileReader(corpus));
       String line;
       while ((line = in.readLine()) != null) {
+        totalCount++;
         boolean matched = false;
         for (Matcher alert : alertList) {
           alert.reset(line);
@@ -57,6 +61,7 @@ class BenchJava {
     Date endTime = new Date();
     
     System.out.println("Elapsed time: " + ((endTime.getTime() - startTime.getTime()) / 1000.0));
+    System.out.println("Total: " + totalCount);
     System.out.println("Alert: " + alertCount);
     System.out.println("Suppress: " + suppressCount);
     System.out.println("Limbo: " + limboCount);

@@ -7,16 +7,20 @@ use Time::HiRes qw( time );
 my $corpus = $ARGV[0] ? $ARGV[0] : 'corpus-syslog';
 
 my @alert = load_regex_file('regex-alert');
+print 'Loaded ' . scalar(@alert) . " alert\n";
 my @suppress = load_regex_file('regex-suppress');
+print 'Loaded ' . scalar(@suppress) . " suppress\n";
 
 my $starttime = time;
 
 # Apply regexes to corpus, counting hits and misses
+my $total_count = 0;
 my $alert_count = 0;
 my $suppress_count = 0;
 my $limbo_count = 0;
 open(my $cfh, '<', $corpus) or die;
 LINE: while(my $line = <$cfh>) {
+  $total_count++;
   foreach my $alert (@alert) {
     if ($line =~ $alert) {
       $alert_count++;
@@ -37,6 +41,7 @@ my $endtime = time;
 
 # Print time and counters
 print 'Elapsed time: ', $endtime - $starttime, "\n";
+print "Total: $total_count\n";
 print "Alert: $alert_count\n";
 print "Suppress: $suppress_count\n";
 print "Limbo: $limbo_count\n";
